@@ -1,22 +1,21 @@
-@extends('layouts.master')
-@section('contenido')
+@extends('layouts.app')
 
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Register') }}</div>
 
-<div class="row">
-<div class="col-md-8">
-    <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">Editar Perfil</h4>
-        </div>
-        <div class="card-body">
-            <form method="POST" action="{{ route('update') }}" aria-label="{{ __('Update') }}" enctype="multipart/form-data">
-                @csrf
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}" enctype="multipart/form-data">
+                        @csrf
                         <!-- fullname -->
                         <div class="form-group row">
                             <label for="fullname" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Completo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="fullname" type="text" class="form-control{{ $errors->has('fullname') ? ' is-invalid' : '' }}" name="fullname" value="{{ Auth::user()->fullname }}" required autofocus>
+                                <input id="fullname" type="text" class="form-control{{ $errors->has('fullname') ? ' is-invalid' : '' }}" name="fullname" value="{{ old('fullname') }}" required autofocus>
 
                                 @if ($errors->has('fullname'))
                                     <span class="invalid-feedback" role="alert">
@@ -30,7 +29,7 @@
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de Usuario') }}</label>
 
                             <div class="col-md-6">
-                                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ Auth::user()->username }}" required autofocus>
+                                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
 
                                 @if ($errors->has('username'))
                                     <span class="invalid-feedback" role="alert">
@@ -44,7 +43,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Dirección E-Mail') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ Auth::user()->email }}" required>
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
@@ -80,7 +79,7 @@
                             <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Edad') }}</label>
 
                             <div class="col-md-6">
-                                <input id="age" type="number" class="form-control{{ $errors->has('age') ? ' is-invalid' : '' }}" name="age" value="{{ Auth::user()->age }}" autofocus>
+                                <input id="age" type="number" class="form-control{{ $errors->has('age') ? ' is-invalid' : '' }}" name="age" value="{{ old('age') }}" autofocus>
 
                                 @if ($errors->has('age'))
                                     <span class="invalid-feedback" role="alert">
@@ -95,7 +94,7 @@
 
                             <div class="col-md-6">
                                 <select class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" id="gender" required>
-                                    <option value="{{ Auth::user()->gender }}" >{{ Auth::user()->gender == 1? "Hombre":"Mujer"}}</option>
+                                    <option value="1">Elegir Genero</option>
                                     <option value="1">Hombre</option>
                                     <option value="2">Mujer</option>
                                 </select>
@@ -119,7 +118,7 @@
                             <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('Comentario sobre mi') }}</label>
 
                             <div class="col-md-6">
-                               <textarea  type="text" name="comment" class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}" placeholder="Comentario ..." rows="5" cols="80">{{Auth::user()->comment}}</textarea>
+                               <textarea  type="text" name="comment" class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}" value="{{old('comment')}}" placeholder="Comentario ..." rows="5" cols="80">{{old('comment')}}</textarea>
                                 @if ($errors->has('comment'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('comment') }}</strong>
@@ -127,46 +126,19 @@
                                 @endif
                             </div>
                         </div>
-                <button type="submit" class="btn btn-info btn-fill pull-right">Editar</button>
-                <div class="clearfix"></div>
-            </form>
-        </div>
-    </div>
-</div>
-@guest
-@else
-<div class="col-md-4">
-    <div class="card card-user">
-        
-        <div class="card-body">
-            <div class="author">
-                <a >
-                    <div class="card-image">
-            <img class="img-fluid img-thumbnail" src="{{ url('/photo/' . Auth::user()->photo) }}" alt="...">
-        </div>
-                    <h5 class="title">{{ Auth::user()->fullname }}</h5>
-                </a>
-                <br>
-                <p class="description">
-                    Usuario: {{ Auth::user()->username}}
-                    <br>
-                    Correo: {{ Auth::user()->email}}
-                    <br>
-                    {{ Auth::user()->gender == 1? "Hombre": "Mujer"}}
-                    <br>
-                    Edad: {{ Auth::user()->age}}
-                </p>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                                <button class="btn btn-danger" type="reset">Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <br>
-            <p class="description text-center">
-                "{{ Auth::user()->comment }}"
-            </p>
         </div>
-        <hr>
     </div>
 </div>
-@endguest
-
-</div>
-
 @endsection

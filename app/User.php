@@ -7,6 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    protected $table='user';
+
+    protected $primaryKey = "iduser";
     use Notifiable;
 
     /**
@@ -15,7 +18,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'fullname',
+        'username',
+        'email',
+        'password',
+        'age',
+        'gender',
+        'photo',
+        'comment'
     ];
 
     /**
@@ -26,4 +36,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+/*
+    public function photo_my(){
+        return dump( $this);// $this->photo;
+    }
+*/
 }

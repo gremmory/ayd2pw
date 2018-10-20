@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col-md-8 pr-1">
                             <div class="form-group">
-                                <label>Nombre Comple</label>
+                                <label>Nombre Completo</label>
                                 <input type="text" class="form-control" placeholder="Full Name" required>
                             </div>
                         </div>

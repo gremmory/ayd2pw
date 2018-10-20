@@ -49,9 +49,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'fullname' => 'required|string|max:100',
+            'username' => 'required|string|min:5|max:50',
+            'email' => 'required|string|email|max:60|unique:user',
             'password' => 'required|string|min:6|confirmed',
+            'age' => 'integer|between:1,100',
+            'gender' => 'boolean',
+            'photo' => '',
+            'photo.*' => 'mimes:jpeg,jpg,png,gif',
+            'comment' => 'max:250'
         ]);
     }
 
@@ -63,10 +69,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $request= \Request::capture();
+
+        
+        $image = $request->file('photo');
+        $input = null;
+        if(isset($image)){
+            $input = uniqid().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/photo');
+            $image->move($destinationPath, $input);
+        }
+
+
         return User::create([
-            'name' => $data['name'],
+            'fullname' => $data['fullname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'username' => $data['username'],
+            'age' => $data['age'],
+            'gender' => $data['gender'],
+            'photo' => $input,
+            'comment' => $data['comment'],
         ]);
     }
+
 }

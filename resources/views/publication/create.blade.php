@@ -8,14 +8,19 @@
             <div class="card-header">
                 <h4 class="card-title">Realizar Publicacion</h4>
             </div>
+
+            <div class="alert alert-success" id="success" style="display:none"></div> 
+            <div class="alert alert-danger" id="fail" style="display:none"></div>
+            
             <div class="card-body">
-                <form>
+                {!! Form::open(array('url'=> '/publications/store',  'method'=>'POST', 'autocomplete'=>'off', 'enctype'=>'multipart/form-data', 'id'=>'casasola')) !!}
+                {{ Form::token() }}
                     <div class="row">
 
                         <div class="col-md-12 pr-1">
                             <div class="form-group">
                                 <label for="exampleFormControlFile1">Publicacion de Imagen</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                <input type="file" class="form-control-file" id="file" name="file" required>
                             </div>
                         </div>
                     </div>
@@ -23,7 +28,7 @@
                         <div class="col-md-12 pr-1">
                             <div class="form-group">
                                 <label>Comentario</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" required></textarea>
+                                <textarea class="form-control" id="comment" name="comment" maxlength="128" rows="5" ></textarea>
                             </div>
                         </div>
                     </div>
@@ -31,13 +36,15 @@
                         <div class="col-md-12 pr-1">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Etiquetas</label>
-                                <input type="email" class="form-control" placeholder="Email" required>
+                                <input type="text" class="form-control" data-role="tagsinput" id="hashtag" name="hashtag" required>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-info btn-fill pull-right">Nuevo</button>
-                    <div class="clearfix"></div>
-                </form>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Nuevo</button>
+                        <button class="btn btn-danger" type="reset">Cancelar</button>
+                    </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
