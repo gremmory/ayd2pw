@@ -30,6 +30,15 @@ class Publications extends Model
     	return $this->hasMany('App\Category', 'multimedia_idmultimedia', 'idmultimedia');
     }
 
+    public function rank_like($id){
+        return \App\Rank::where('rank.multimedia_idmultimedia', '=', $id)->where('like', '=', 1)->count();
+        //return count($this->hasMany('App\Rank')->where('like', '=', 1));
+    }
+
+    public function rank_dislike($id){
+        return \App\Rank::where('rank.multimedia_idmultimedia', '=', $id)->where('like', '=', 2)->count();
+        //return count($this->hasMany('App\Rank')->where('like', '=', 2));
+    }
 
 
 /*

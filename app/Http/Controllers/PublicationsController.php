@@ -33,83 +33,25 @@ class PublicationsController extends Controller
             //->where('count(category.multimedia_idmultimedia)', '>' , 0)
             //->select('multimedia.*')
     		orderBy('multimedia.created_at', 'desc')
-            ->paginate(20)
+            ->paginate(10)
     		;
-    		//
-    		//->where
-    		return view('publication.index', ["multimedia"=>$multimedia, "searchText"=>$query]);
+    		return view('publication.index', ["multimedia"=>$multimedia, "searchText"=>$query, "my" => 0]);
     	}
-    }
-
-    public function create (){
-    	return view ('publication.create');
     }
 
     public function store (Request $request){
         return "Putos";
     }
-    public function insert (Request $request){
-        if ($request->session()->has('user')) {
-            return response()->json(['fail', "Debe tener una sesion activa..."]);
-        }
-
-        $validatedData = $request->validate([
-            'comment' => 'max:128',
-        ]);
-
-        $image = $request->file('file');
-        $input = null;
-        if(isset($image)){
-            $input = uniqid().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/img');
-            $image->move($destinationPath, $input);
-        }
-
-        if($input == null){
-            return response()->json(['fail', "Debe subir una imagen valida"]);
-        }
-
-        $publication = new Publications;
-        $publication->comment = $request->comment;
-        $publication->route = $input;
-        $publication->user_iduser = Auth::user()->iduser;
-
-        $has =  explode(",",$request->has);
-        //return $has;
-        
-        if($this->errorHashag($has) == true){
-            return response()->json(['fail', "La imagen incita violencia"]);
-        }
-        
-        //return $this->errorHashag($has) ? "hola" : "Feo";
-
-        $publication->save();
-        
-        //get all the tags and convert in array
-        foreach ($has as $key => $hash_tag) {
-            //return $hash_tag;
-            $create_tag = Hashtag::firstOrCreate(['hashtag' => $hash_tag]);
-
-            $category = new Category;
-            $category->hashtag_idhastag = $create_tag->idhastag;
-            $category->multimedia_idmultimedia = $publication->idmultimedia;
-            $category->save();
-        }
-
-        return response()->json(['success', "Se creo satisfactoriamente..."]); 
+    
+    public function show ($id){
+        $multimedia=Publications::
+        join('category', 'multimedia.idmultimedia', '=', 'category.multimedia_idmultimedia')
+        ->where('category.hashtag_idhastag', '=', $id)
+        ->select('multimedia.*')
+        ->orderBy('multimedia.created_at', 'desc')
+        ->paginate(10) ;
+        return view("publication.index", ["multimedia"=>$multimedia, "my" => 0]);
     }
 
-
-    public function errorHashag($hashtag){
-        $array = array("violencia", "crimen", "asesinato", "pedofilia", "pelea", "sangriento", "acuchillado", "acribillado", "duglas", "henry");
-
-
-        foreach ($hashtag as $key => $value) {
-            # code...
-            if(in_array(strtolower($value), $array) == true) { //
-                return true;
-            }
-        }
-        return false;
-    }
+    
 }
