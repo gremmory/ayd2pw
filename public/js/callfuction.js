@@ -10,7 +10,7 @@ $(document).ready(function(){
       formData.append('has', $("#hashtag").val());
       formData.append('comment', $("#comment").val())
       $.ajax({
-            url: '/mypublications/store',  
+            url: '/mypublications/insert',  
             type: 'POST',
             data: formData,
             cache: false,
@@ -40,8 +40,10 @@ $(document).ready(function(){
             },
             //timeout: 100000,
             error: function(jqXHR, textStatus, errorThrown){
-		    	console.log(JSON.stringify(jqXHR));
-		        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+		    	//console.log(JSON.stringify(jqXHR));
+		        //console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                console.log((jqXHR));
+
 		    }
         });
     });

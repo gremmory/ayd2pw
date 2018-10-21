@@ -17,30 +17,39 @@
                 <br>
             </div> <!-- col-lg-4 col-md-2 col-sm-4-->
             <div class="row justify-content-center justify-content-lg-center justify-content-md-center justify-content-sm-center">
-                @if (Auth::user()->iduser != $an->user_iduser)
-                <div class="col-4">
-                <a href="" id="like_{{$an->idmultimedia}}">
-                    <i class="fas fa-2x fa-thumbs-up"></i>
-                    <likep name="like_{{$an->idmultimedia}}">&nbsp;{{$an->rank_like($an->idmultimedia)}}</likep>
-                    <like hidden="true" name="like_{{$an->idmultimedia}}">{{$an->idmultimedia}}</like>
-                </a>
-
-                </div>
-                <div class="col-4">
-                <a href="" id="likes_{{$an->idmultimedia}}">
-                    <i class="fas fa-2x fa-thumbs-down"></i>
-                    <dislikep name="likes_{{$an->idmultimedia}}">&nbsp;{{$an->rank_dislike($an->idmultimedia)}}</dislikep>
-                    <dislike hidden="true" name="likes_{{$an->idmultimedia}}">{{$an->idmultimedia}}</dislike>
-                </a>
-                </div>
+                @guest
+                    <div class="col-4">
+                    <i class="fas fa-2x fa-thumbs-up"></i>&nbsp;{{$an->rank_like($an->idmultimedia)}}
+                    </div>
+                    <div class="col-4">
+                    <i class="fas fa-2x fa-thumbs-down"></i>&nbsp;{{$an->rank_dislike($an->idmultimedia)}}
+                    </div>
                 @else
-                <div class="col-4">
-                <i class="fas fa-2x fa-thumbs-up"></i>&nbsp;{{$an->rank_like($an->idmultimedia)}}
-                </div>
-                <div class="col-4">
-                <i class="fas fa-2x fa-thumbs-down"></i>&nbsp;{{$an->rank_dislike($an->idmultimedia)}}
-                </div>
-                @endif
+                    @if (Auth::user()->iduser != $an->user_iduser)
+                    <div class="col-4">
+                    <a href="" id="like_{{$an->idmultimedia}}">
+                        <i class="fas fa-2x fa-thumbs-up"></i>
+                        <likep name="like_{{$an->idmultimedia}}">&nbsp;{{$an->rank_like($an->idmultimedia)}}</likep>
+                        <like hidden="true" name="like_{{$an->idmultimedia}}">{{$an->idmultimedia}}</like>
+                    </a>
+
+                    </div>
+                    <div class="col-4">
+                    <a href="" id="likes_{{$an->idmultimedia}}">
+                        <i class="fas fa-2x fa-thumbs-down"></i>
+                        <dislikep name="likes_{{$an->idmultimedia}}">&nbsp;{{$an->rank_dislike($an->idmultimedia)}}</dislikep>
+                        <dislike hidden="true" name="likes_{{$an->idmultimedia}}">{{$an->idmultimedia}}</dislike>
+                    </a>
+                    </div>
+                    @else
+                    <div class="col-4">
+                    <i class="fas fa-2x fa-thumbs-up"></i>&nbsp;{{$an->rank_like($an->idmultimedia)}}
+                    </div>
+                    <div class="col-4">
+                    <i class="fas fa-2x fa-thumbs-down"></i>&nbsp;{{$an->rank_dislike($an->idmultimedia)}}
+                    </div>
+                    @endif
+                @endguest
             </div>
             <hr>
             <div class="button-container mr-auto ml-auto">
@@ -75,21 +84,30 @@
                 
             </div>
             <div class="row justify-content-center">
-                @if (Auth::user()->iduser != $an->user_iduser)
-                <div class="col-4">
-                <a href="" id="like_{{$an->idmultimedia}}"><i class="fas fa-2x fa-thumbs-up"></i>&nbsp;{{$an->rank_like($an->idmultimedia)}}</a>
-                </div>
-                <div class="col-4">
-                <a href="" id="dislike"><i class="fas fa-2x fa-thumbs-down"></i>&nbsp;{{$an->rank_dislike($an->idmultimedia)}}</a>
-                </div>
+                @guest
+                    <div class="col-4">
+                    <i class="fas fa-2x fa-thumbs-up"></i>&nbsp;{{$an->rank_like($an->idmultimedia)}}
+                    </div>
+                    <div class="col-4">
+                    <i class="fas fa-2x fa-thumbs-down"></i>&nbsp;{{$an->rank_dislike($an->idmultimedia)}}
+                    </div>
                 @else
-                <div class="col-4">
-                <i class="fas fa-2x fa-thumbs-up"></i>&nbsp;{{$an->rank_like($an->idmultimedia)}}
-                </div>
-                <div class="col-4">
-                <i class="fas fa-2x fa-thumbs-down"></i>&nbsp;{{$an->rank_dislike($an->idmultimedia)}}
-                </div>
-                @endif
+                    @if (Auth::user()->iduser != $an->user_iduser)
+                    <div class="col-4">
+                    <a href="" id="like_{{$an->idmultimedia}}"><i class="fas fa-2x fa-thumbs-up"></i>&nbsp;{{$an->rank_like($an->idmultimedia)}}</a>
+                    </div>
+                    <div class="col-4">
+                    <a href="" id="dislike"><i class="fas fa-2x fa-thumbs-down"></i>&nbsp;{{$an->rank_dislike($an->idmultimedia)}}</a>
+                    </div>
+                    @else
+                    <div class="col-4">
+                    <i class="fas fa-2x fa-thumbs-up"></i>&nbsp;{{$an->rank_like($an->idmultimedia)}}
+                    </div>
+                    <div class="col-4">
+                    <i class="fas fa-2x fa-thumbs-down"></i>&nbsp;{{$an->rank_dislike($an->idmultimedia)}}
+                    </div>
+                    @endif
+                @endguest
             </div>
             <hr>
             <div class="button-container mr-auto ml-auto">
@@ -115,141 +133,5 @@
     @endforeach
 {{$multimedia->render()}}
 @endif
-
-<!--
-<div class="row justify-content-center">
-    <div class="col-4">
-        <div class="card card-user">
-            <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
-            <div > 
-                <p class="description text-center">
-                    "Lamborghini Mercy
-                    <br> Your chick she so thirsty
-                    <br> I'm in that two seat Lambo"
-                </p>
-            </div>
-            <hr>
-            <div class="button-container mr-auto ml-auto">
-                <a href="">
-                    <i class="btn btn-info"> Editar </i>
-                </a>
-                <a href="">
-                    <i class="btn btn-info"> Editar </i>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row justify-content-center">
-    <div class="col-4">
-        <div class="card card-user">
-            <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
-            <div > 
-                <p class="description text-center">
-                    "Lamborghini Mercy
-                    <br> Your chick she so thirsty
-                    <br> I'm in that two seat Lambo"
-                </p>
-            </div>
-            <hr>
-            <div class="button-container mr-auto ml-auto">
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-facebook-square">Etiqueta_1</i>
-                </button>
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-twitter">Etiqueta_2</i>
-                </button>
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-google-plus-square">Etiqueta_3</i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<div class="row justify-content-center">
-    <br><br><br>
-    <div class="col-4">
-        <div class="card card-user">
-            <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
-            <div > 
-                <p class="description text-center">
-                    "Lamborghini Mercy
-                    <br> Your chick she so thirsty
-                    <br> I'm in that two seat Lambo"
-                </p>
-            </div>
-            <hr>
-            <div class="button-container mr-auto ml-auto">
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-facebook-square">Etiqueta_1</i>
-                </button>
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-twitter">Etiqueta_2</i>
-                </button>
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-google-plus-square">Etiqueta_3</i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-</div>
-<div class="row justify-content-center">
-    <div class="col-4">
-        <div class="card card-user">
-            <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
-            <div > 
-                <p class="description text-center">
-                    "Lamborghini Mercy
-                    <br> Your chick she so thirsty
-                    <br> I'm in that two seat Lambo"
-                </p>
-            </div>
-            <hr>
-            <div class="button-container mr-auto ml-auto">
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-facebook-square">Etiqueta_1</i>
-                </button>
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-twitter">Etiqueta_2</i>
-                </button>
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-google-plus-square">Etiqueta_3</i>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row justify-content-center">
-    <br><br><br>
-    <div class="col-4">
-        <div class="card card-user">
-            <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="...">
-            <div > 
-                <p class="description text-center">
-                    "Lamborghini Mercy
-                    <br> Your chick she so thirsty
-                    <br> I'm in that two seat Lambo"
-                </p>
-            </div>
-            <hr>
-            <div class="button-container mr-auto ml-auto">
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-facebook-square">Etiqueta_1</i>
-                </button>
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-twitter">Etiqueta_2</i>
-                </button>
-                <button href="#" class="btn btn-simple btn-link btn-icon">
-                    <i class="fa fa-google-plus-square">Etiqueta_3</i>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
--->
 
 @endsection

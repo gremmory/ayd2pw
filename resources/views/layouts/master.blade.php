@@ -77,9 +77,9 @@
           </a>
 
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">Mi Perfil</a>
+            <a class="dropdown-item" href="{{url('/user/updateprofile')}}">Mi Perfil</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">Logout</a>
           </div>
         </li>
         @endguest
@@ -92,7 +92,7 @@
       <!-- Sidebar -->
       <ul class="sidebar navbar-nav toggled">
         <li class="nav-item active">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="{{URL::action('PublicationsController@index')}}">
             <i class="fas fa-fw fa-images"></i>
             <span>Publicaciones</span>
           </a>
@@ -100,17 +100,15 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
+            <span>Información</span>
           </a>
           <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <h6 class="dropdown-header">Login Screens:</h6>
-            <a class="dropdown-item" href="login.html">Login</a>
-            <a class="dropdown-item" href="register.html">Register</a>
-            <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
+            <h6 class="dropdown-header">Mis Datos</h6>
+            <a class="dropdown-item" href="{{url('/user/updateprofile')}}">Perfil</a>
             <div class="dropdown-divider"></div>
-            <h6 class="dropdown-header">Other Pages:</h6>
-            <a class="dropdown-item" href="404.html">404 Page</a>
-            <a class="dropdown-item" href="blank.html">Blank Page</a>
+            <h6 class="dropdown-header">Publicaciones</h6>
+            <a class="dropdown-item" href="{{URL::action('MyPublicationsController@index')}}">Mis Publicaciones</a>
+            <a class="dropdown-item" href="{{URL::action('MyPublicationsController@create')}}">Nueva Publicación</a>
           </div>
         </li>
         <!--
@@ -131,17 +129,17 @@
 
         <div class="container-fluid">
 
-          <!-- Breadcrumbs-->
+          <!-- Breadcrumbs
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
               <a href="#">Publicaciones</a>
             </li>
             <li class="breadcrumb-item active">Inicio</li>
           </ol>
-
+-->
           <!-- Icon Cards-->
           <div class="row">
-            <div class="col-xl-4 col-sm-6 mb-4">
+            <div class="col-xl-6 col-sm-8 mb-6">
               <div class="card text-white bg-primary o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
@@ -149,24 +147,8 @@
                   </div>
                   <div class="mr-5">Mas Likes!</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
-                  <span class="float-left">Ver Publicacion</span>
-                  <span class="float-right">
-                    <i class="fas fa-angle-right"></i>
-                  </span>
-                </a>
-              </div>
-            </div>
 
-            <div class="col-xl-4 col-sm-6 mb-4">
-              <div class="card text-white bg-warning o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                    <i class="fas fa-fw fa-list"></i>
-                  </div>
-                  <div class="mr-5">Nueva</div>
-                </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="{{URL::action('PublicationsController@morelike')}}">
                   <span class="float-left">Ver Publicacion</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>
@@ -174,7 +156,7 @@
                 </a>
               </div>
             </div>
-            <div class="col-xl-4 col-sm-6 mb-4">
+            <div class="col-xl-6 col-sm-8 mb-6">
               <div class="card text-white bg-success o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
@@ -182,7 +164,7 @@
                   </div>
                   <div class="mr-5">Mas Dislike</div>
                 </div>
-                <a class="card-footer text-white clearfix small z-1" href="#">
+                <a class="card-footer text-white clearfix small z-1" href="{{URL::action('PublicationsController@moredislike')}}">
                   <span class="float-left">Ver Publicacion</span>
                   <span class="float-right">
                     <i class="fas fa-angle-right"></i>

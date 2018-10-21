@@ -13,7 +13,7 @@
             <div class="alert alert-danger" id="fail" style="display:none"></div>
             
             <div class="card-body">
-                {!! Form::open(array('url'=> '/publications/store',  'method'=>'POST', 'autocomplete'=>'off', 'enctype'=>'multipart/form-data', 'id'=>'casasola')) !!}
+                {!! Form::open(array('url'=> '/mypublications/insert',  'method'=>'POST', 'autocomplete'=>'off', 'enctype'=>'multipart/form-data', 'id'=>'casasola')) !!}
                 {{ Form::token() }}
                     <div class="row">
 

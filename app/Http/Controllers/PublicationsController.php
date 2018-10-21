@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use App\Rank;
 
 class PublicationsController extends Controller
 {
@@ -42,7 +43,7 @@ class PublicationsController extends Controller
     public function store (Request $request){
         return "Putos";
     }
-    
+
     public function show ($id){
         $multimedia=Publications::
         join('category', 'multimedia.idmultimedia', '=', 'category.multimedia_idmultimedia')
@@ -53,5 +54,32 @@ class PublicationsController extends Controller
         return view("publication.index", ["multimedia"=>$multimedia, "my" => 0]);
     }
 
-    
+    public function morelike(Request $request){
+        $multimedia=Publications::
+        join('rank as ll', 'll.multimedia_idmultimedia', '=', 'multimedia.idmultimedia')
+        //->select('multimedia.*')
+        ->select(DB::raw('multimedia.*, count(ll.multimedia_idmultimedia) as likes'))
+        ->where('ll.like', '=', 1)
+        ->groupby('ll.multimedia_idmultimedia')
+        ->orderBy('likes', 'desc')
+        //->get();
+        ->paginate(10);
+
+        return view('publication.index', ["multimedia"=>$multimedia, "my" => 0]);
+    }   
+
+    public function moredislike(Request $request){
+        $multimedia=Publications::
+        join('rank as ll', 'll.multimedia_idmultimedia', '=', 'multimedia.idmultimedia')
+        //->select('multimedia.*')
+        ->select(DB::raw('multimedia.*, count(ll.multimedia_idmultimedia) as likes'))
+        ->where('ll.like', '=', 2)
+        ->groupby('ll.multimedia_idmultimedia')
+        ->orderBy('likes', 'desc')
+        //->get();
+        ->paginate(10);
+
+        return view('publication.index', ["multimedia"=>$multimedia, "my" => 0]);
+    }   
+
 }
