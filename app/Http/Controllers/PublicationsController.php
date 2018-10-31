@@ -20,6 +20,40 @@ class PublicationsController extends Controller
 
     }
 
+    public function search(Request $request){
+        //$multimedia=Publications::all();
+
+        $multimedia = Publications:://all(); //DB::table("multimedia")
+                    join('category', 'category.multimedia_idmultimedia', '=', 'multimedia.idmultimedia')
+                    ->join('hashtag', 'hashtag.idhastag', '=', 'category.hashtag_idhastag')
+                    ->select("multimedia.comment","multimedia.idmultimedia", "multimedia.route", "multimedia.user_iduser", "multimedia.created_at");
+        /*
+        $multimedia = $multimedia
+        ->whereRaw("hashtag.hashtag = 'prueba1'")
+        ->OrwhereRaw("hashtag.hashtag = 'prueba2'")
+        ->get()->toArray();
+        return $multimedia;
+        */
+        $estado = 0;
+        $has =  explode(",",$request->hashtag);
+        foreach ($has as $key => $hash_tag) {
+            if($estado == 0){
+                $multimedia = $multimedia->whereRaw("hashtag.hashtag = '" . $hash_tag . "'");
+            }else{
+                $multimedia = $multimedia->OrwhereRaw("hashtag.hashtag = '" . $hash_tag . "'");
+            }
+            $estado = 1;
+            //$multimedia = $multimedia->whereRaw("hashtag.hashtag = '" . $hash_tag . "'");
+        }
+        $multimedia = $multimedia
+            ->groupBy("multimedia.comment","multimedia.idmultimedia", "multimedia.route", "multimedia.user_iduser", "multimedia.created_at")
+            ->orderBy('multimedia.created_at', 'desc')
+            ->paginate(10);
+            //->get()->toArray();
+        return view('publication.index', ["multimedia"=>$multimedia,  "my" => 0]);
+        //return $multimedia;
+    }
+
     public function index (Request $request){
     	if($request){
     		//busqueda por categoria

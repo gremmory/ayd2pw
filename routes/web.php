@@ -30,6 +30,8 @@ Route::resource('/', 'PublicationsController')->only([
     'index', 'show'
 ]);
 
+Route::post('/', 'PublicationsController@search');
+
 Route::resource('publications', 'PublicationsController')->only([
     'index', 'show'
 ]);

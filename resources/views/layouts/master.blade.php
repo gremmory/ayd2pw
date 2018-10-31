@@ -40,16 +40,30 @@
 
       <!-- Navbar Search -->
       <ul class="nav navbar-nav mr-auto">
-      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      <!--
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" >
+      -->
+      
+      {{Form::open (array('action'=>array('PublicationsController@search'), 'method'=>'POST'))}}
+      {{ Form::token() }}
         <div class="input-group">
+          <!--
+
           <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search"  data-role="tagsinput" id="hashtag" name="hashtag" required>
+        -->
           <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
+            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search"  data-role="tagsinput" id="hashtag" name="hashtag" required>
+            <button class="btn btn-primary" type="submit">
               <i class="fas fa-search"></i>
             </button>
           </div>
         </div>
+      {!! Form::close() !!}
+      {{Form::close()}}
+      <!--
       </form>
+    -->
     </ul>
 
       <!-- Navbar -->
