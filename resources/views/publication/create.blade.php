@@ -11,6 +11,12 @@
 
             <div class="alert alert-success" id="success" style="display:none"></div> 
             <div class="alert alert-danger" id="fail" style="display:none"></div>
+            @if (\Session::has('success'))
+                <div class="alert alert-success" id="success">{!! \Session::get('success') !!}</div>
+            @endif
+            @if (\Session::has('fail'))
+                <div class="alert alert-danger" id="fail" >{!! \Session::get('fail') !!}</div>
+            @endif
             
             <div class="card-body">
                 {!! Form::open(array('url'=> '/mypublications/insert',  'method'=>'POST', 'autocomplete'=>'off', 'enctype'=>'multipart/form-data', 'id'=>'casasola')) !!}

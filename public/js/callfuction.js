@@ -1,6 +1,9 @@
 $(document).ready(function(){
-   $("#casasola").submit(function(evento){
+   $("#casasoli").submit(function(evento){
       evento.preventDefault();
+      console.log($("#hashtag").tagsinput('items') + " ------->");
+      console.log($("#hashtag").text() + " ------->");
+      console.log($("#hashtag").val('items') + " ------->");
 
       document.getElementById('fail').style.display = 'none';
       document.getElementById('success').style.display = 'none';
@@ -8,7 +11,8 @@ $(document).ready(function(){
       formData.append('_token',$('input[name="_token"]').val());//$('meta[name="csrf-token"]').attr('content'));
       formData.append('file',$('#file')[0].files[0]);
       formData.append('has', $("#hashtag").val());
-      formData.append('comment', $("#comment").val())
+      formData.append('comment', $("#comment").val());
+      //console.log($("#hashtag").val());
       $.ajax({
             url: '/mypublications/insert',  
             type: 'POST',

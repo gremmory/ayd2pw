@@ -36,6 +36,8 @@ class MyPublicationsController extends Controller
         if ($request->session()->has('user')) {
             return response()->json(['fail', "Debe tener una sesion activa..."]);
         }
+        //$has =  explode(",",$request->hashtag);
+        //return $has;
 
         //return $request->comment;
 
@@ -60,11 +62,12 @@ class MyPublicationsController extends Controller
         $publication->route = $input;
         $publication->user_iduser = Auth::user()->iduser;
 
-        $has =  explode(",",$request->has);
+        $has =  explode(",",$request->hashtag);
         //return $has;
         
         if($this->errorHashag($has) == true){
-            return response()->json(['fail', "La imagen incita violencia"]);
+            return redirect()->back()->with('fail', "La imagen incita violencia"); 
+            //return response()->json(['fail', "La imagen incita violencia"]);
         }
         
         //return $this->errorHashag($has) ? "hola" : "Feo";
@@ -82,7 +85,8 @@ class MyPublicationsController extends Controller
             $category->save();
         }
 
-        return response()->json(['success', "Se creo satisfactoriamente..."]); 
+        return redirect()->back()->with('success', "Se creo satisfactoriamente..."); 
+        //return response()->json(['success', "Se creo satisfactoriamente..."]); 
     }
 
     public function errorHashag($hashtag){
