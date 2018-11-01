@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: ExampleFont;
-  src: url( {{asset('webfonts/fa-solid-900.woff2')}} ) format('woff'),
+  src: url( {{asset('webfonts/fa-solid-900.woff2')}} ) format('woff2'),
         url( {{asset('webfonts/fa-solid-900.woff')}} ) format('woff'),
         url({{asset('webfonts/fa-solid-900.eot')}}) format('eot');
   font-weight: 400;

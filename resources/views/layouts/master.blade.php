@@ -39,19 +39,14 @@
       </button>
 
       <!-- Navbar Search -->
-      <ul class="nav navbar-nav mr-auto">
+      <!--<ul class="nav navbar-nav mr-auto ">-->
       <!--
       <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" >
       -->
       
-      {{Form::open (array('action'=>array('PublicationsController@search'), 'method'=>'POST'))}}
+      {{Form::open (array('action'=>array('PublicationsController@search'), 'method'=>'POST', 'class' => 'd-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0'))}}
       {{ Form::token() }}
         <div class="input-group">
-          <!--
-
-          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search"  data-role="tagsinput" id="hashtag" name="hashtag" required>
-        -->
           <div class="input-group-append">
             <input type="text" class="form-control" placeholder="Search for..." aria-label="Search"  data-role="tagsinput" id="hashtag" name="hashtag" required>
             <button class="btn btn-primary" type="submit">
@@ -61,22 +56,11 @@
         </div>
       {!! Form::close() !!}
       {{Form::close()}}
-      <!--
-      </form>
-    -->
-    </ul>
+      <!--</ul>-->
+
 
       <!-- Navbar -->
       <ul class="navbar-nav ml-auto ml-md-0">
-
-
-
-                         
-                            
-                            
-
-
-
         @guest
         <li class="nav-item">
             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -125,35 +109,15 @@
             <a class="dropdown-item" href="{{URL::action('MyPublicationsController@create')}}">Nueva Publicación</a>
           </div>
         </li>
-        <!--
-        <li class="nav-item">
-          <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
-        </li>
-      -->
       </ul>
+      </nav>
 
       <div id="content-wrapper">
 
         <div class="container-fluid">
-
-          <!-- Breadcrumbs
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="#">Publicaciones</a>
-            </li>
-            <li class="breadcrumb-item active">Inicio</li>
-          </ol>
--->
           <!-- Icon Cards-->
-          <div class="row">
-            <div class="col-xl-6 col-sm-8 mb-6">
+          <div class="row align-items-center">
+            <div class="col-xl-auto col-lg-auto col-md-auto col-sm-auto">
               <div class="card text-white bg-primary o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
@@ -170,7 +134,7 @@
                 </a>
               </div>
             </div>
-            <div class="col-xl-6 col-sm-8 mb-6">
+            <div class="col-xl-auto col-lg-auto col-md-auto col-sm-auto">
               <div class="card text-white bg-success o-hidden h-100">
                 <div class="card-body">
                   <div class="card-body-icon">
