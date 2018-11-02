@@ -15,6 +15,8 @@
                     @endif
 
                     You are logged in!
+                    <br>
+                    Page reading
                 </div>
             </div>
         </div>
