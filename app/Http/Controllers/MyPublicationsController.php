@@ -72,6 +72,8 @@ class MyPublicationsController extends Controller
         
         //return $this->errorHashag($has) ? "hola" : "Feo";
 
+        //este es un comentario
+
         $publication->save();
         
         //get all the tags and convert in array
